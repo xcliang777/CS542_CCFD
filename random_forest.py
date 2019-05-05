@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split, KFold
 from sklearn.metrics import confusion_matrix
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
 import itertools
 
@@ -35,6 +35,28 @@ def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.cm.Blu
 	plt.tight_layout()
 	plt.ylabel("True Label")
 	plt.xlabel("Predicted Label")
+
+def rf_train(oversample_X, oversample_Y, undersample_X, underSample_Y):
+	train_under = RandomForestClassifier(random_state=42)
+	train_under = train_under.fit(undersample_X, underSample_Y)
+
+	y_train = train_under.predict(undersample_X)
+
+	print(metrics.classification_report(underSample_Y, y_train))
+	print(metrics.confusion_matrix(underSample_Y, y_train))
+
+	cm = confusion_matrix(underSample_Y, y_train)
+	# cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+	plt.figure(figsize=(5, 5))
+	# plot_confusion_matrix(cm_normalized, title='Normalized confusion matrix')
+	class_names = [0, 1]
+	plot_confusion_matrix(cm, class_names, title='Normalized confusion matrix')
+	plt.show()
+	######################################################################
+
+
+def rf_test(test_X, test_Y):
+	print("")
 
 
 # import CSV data
@@ -82,7 +104,7 @@ print("Percentage of fraud transactions: ", len(under_sample_data[under_sample_d
 print("Total number of transactions in resampled data: ", len(under_sample_data))
 
 
-# Split data into trainging set and testing set
+# Split data into training set and testing set
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=0)
 
 
@@ -100,60 +122,46 @@ print("Total member of undersample transactions: ", len(X_train_undersample)+len
 print("")
 
 
-#clf = RandomForestClassifLier(random_state=42)
-clf = LogisticRegression()
-clf = clf.fit(X_train_undersample,Y_train_undersample)
+# y_test_hata = clf.predict(X_test_undersample)
+#
+# 	print(metrics.classification_report(Y_test_undersample, y_test_hata))
+# 	print(metrics.confusion_matrix(Y_test_undersample, y_test_hata))
+#
+# 	cm = confusion_matrix(Y_test_undersample, y_test_hata)
+# 	cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+# 	plt.figure(figsize=(5, 5))
+# 	plot_confusion_matrix(cm, class_names, title='Normalized confusion matrix')
+# 	# plot_confusion_matrix(cm, title='Normalized confusion matrix')
+# 	plt.show()
+#
+# 	from imblearn.over_sampling import SMOTE
+# 	oversampler = SMOTE(random_state=0)
+# 	os_features, os_labels = oversampler.fit_sample(X_train, Y_train)
+# 	print(np.shape(os_features))
+# 	clf = clf.fit(os_features, os_labels)
+# 	y_test_hato = clf.predict(os_features)
+# 	cm = confusion_matrix(os_labels, y_test_hato)
+# 	cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+# 	plt.figure(figsize=(5, 5))
+# 	# plot_confusion_matrix(cm_normalized, title='Normalized confusion matrix')
+# 	plot_confusion_matrix(cm, class_names, title='Normalized confusion matrix')
+# 	plt.show()
+#
+# 	y_test_hate = clf.predict(X_test_undersample)
+#
+# 	print(metrics.classification_report(Y_test_undersample, y_test_hate))
+# 	print(metrics.confusion_matrix(Y_test_undersample, y_test_hate))
+#
+# 	cm = confusion_matrix(Y_test_undersample, y_test_hate)
+# 	cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+# 	plt.figure(figsize=(5, 5))
+# 	plot_confusion_matrix(cm_normalized, class_names, title='Normalized confusion matrix')
+# 	# plot_confusion_matrix(cm, title='Normalized confusion matrix')
+# 	plt.show()
+# 	print("ook")
 
-y_test_hat = clf.predict(X_train_undersample)
-
-print(metrics.classification_report(Y_train_undersample, y_test_hat))
-print(metrics.confusion_matrix(Y_train_undersample, y_test_hat))
-
-cm = confusion_matrix(Y_train_undersample, y_test_hat)
-cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-plt.figure(figsize=(5,5))
-#plot_confusion_matrix(cm_normalized, title='Normalized confusion matrix')
-class_names = [0, 1]
-plot_confusion_matrix(cm, class_names, title='Normalized confusion matrix')
-plt.show()
-######################################################################
-y_test_hata = clf.predict(X_test_undersample)
-
-print(metrics.classification_report(Y_test_undersample, y_test_hata))
-print(metrics.confusion_matrix(Y_test_undersample, y_test_hata))
-
-cm = confusion_matrix(Y_test_undersample, y_test_hata)
-cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-plt.figure(figsize=(5,5))
-plot_confusion_matrix(cm, class_names, title='Normalized confusion matrix')
-#plot_confusion_matrix(cm, title='Normalized confusion matrix')
-plt.show()
 
 
-from imblearn.over_sampling import SMOTE
-oversampler = SMOTE(random_state=0)
-os_features, os_labels = oversampler.fit_sample(X_train, Y_train)
-print(np.shape(os_features))
-clf = clf.fit(os_features,os_labels)
-y_test_hato = clf.predict(os_features)
-cm = confusion_matrix(os_labels, y_test_hato)
-cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-plt.figure(figsize=(5,5))
-#plot_confusion_matrix(cm_normalized, title='Normalized confusion matrix')
-plot_confusion_matrix(cm, class_names, title='Normalized confusion matrix')
-plt.show()
-
-y_test_hate = clf.predict(X_test_undersample)
-
-print(metrics.classification_report(Y_test_undersample, y_test_hate))
-print(metrics.confusion_matrix(Y_test_undersample, y_test_hate))
-
-cm = confusion_matrix(Y_test_undersample, y_test_hate)
-cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
-plt.figure(figsize=(5,5))
-plot_confusion_matrix(cm_normalized, class_names, title='Normalized confusion matrix')
-#plot_confusion_matrix(cm, title='Normalized confusion matrix')
-plt.show()
 
 
 
