@@ -1,5 +1,6 @@
-#import logical_regression
 import random_forest
+import logistic_regression as logr
+
 
 import numpy as np
 import pandas as pd
@@ -12,7 +13,7 @@ from imblearn.over_sampling import SMOTE
 
 warnings.filterwarnings('ignore')
 
-
+print("first enter")
 '''
 Part 1:  Dataset: Overview
 '''
@@ -65,7 +66,13 @@ under_sample_data = data.iloc[under_sample_indices,:]
 undersample_X = under_sample_data.ix[:, under_sample_data.columns != 'Class']
 undersample_Y = under_sample_data.ix[:, under_sample_data.columns == 'Class']
 
+X_train_undersample, X_test_undersample, Y_train_undersample, Y_test_undersample = train_test_split(undersample_X, undersample_Y, test_size=0.3, random_state=0)
 # Showing ratio
+print("--------------------------------------------------------------------------------------------------------------")
+print("Percentage of normal transactions: ", len(under_sample_data[under_sample_data.Class == 0])/len(under_sample_data))
+print("Percentage of fraud transactions: ", len(under_sample_data[under_sample_data.Class == 1])/len(under_sample_data))
+print("Total number of transactions in resampled data: ", len(under_sample_data))
+
 print("--------------------------------------------------------------------------------------------------------------")
 print("Percentage of normal transactions: ", len(under_sample_data[under_sample_data.Class == 0])/len(under_sample_data))
 print("Percentage of fraud transactions: ", len(under_sample_data[under_sample_data.Class == 1])/len(under_sample_data))
@@ -77,7 +84,6 @@ sns.countplot('Class', data=undersample_Y, palette=colors)
 plt.title('Class Distributions \n (0: No Fraud || 1: Fraud)', fontsize=14)
 plt.show()
 
-X_train_undersample, X_test_undersample, Y_train_undersample, Y_test_undersample = train_test_split(undersample_X, undersample_Y, test_size=0.3, random_state=0)
 
 # 4. Preparing Oversampling training dataset using SMOTE algorithm
 oversampler = SMOTE(random_state=0)
@@ -85,24 +91,22 @@ oversample_X, oversample_Y = oversampler.fit_sample(X_train, Y_train)
 print("--------------------------------------------------------------------------------------------------------------")
 print("Percentage of normal transactions: ", len([x for x in oversample_Y if x == 0])/len(oversample_Y))
 print("Percentage of normal transactions: ", len([x for x in oversample_Y if x == 1])/len(oversample_Y))
-print("Total number of transactions in resampled data: ", len(oversample_Y))
-
-# 5. Preparing Undersampled testing data
+print("Total number of oversampled transactions: ", len(oversample_Y))
 
 
 '''
 Part 3:  Method: Logical Regression
 '''
-# logical.rf_under(undersample_X, undersample_Y, X_test, Y_test)
-# random_forest.rf_over(oversample_X, oversample_Y, X_test, Y_test)
-# random_forest.rf_raw(X_train, Y_train, X_test, Y_test)
+logr.LR_under(undersample_X, undersample_Y, X_test_undersample, Y_test_undersample)
+logr.LR_over(oversample_X, oversample_Y, X_test_undersample, Y_test_undersample)
+logr.LR_all(X_train, Y_train, X_test_undersample, Y_test_undersample)
 
 '''
 Part 4:  Method: Random Forest
 '''
-random_forest.rf_under(undersample_X, undersample_Y, X_test, Y_test)
-random_forest.rf_over(oversample_X, oversample_Y, X_test, Y_test)
-random_forest.rf_raw(X_train, Y_train, X_test, Y_test)
+random_forest.rf_under(undersample_X, undersample_Y, X_test_undersample, Y_test_undersample)
+random_forest.rf_over(oversample_X, oversample_Y, X_test_undersample, Y_test_undersample)
+random_forest.rf_raw(X_train, Y_train, X_test_undersample, Y_test_undersample)
 
 
 
