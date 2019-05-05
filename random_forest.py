@@ -47,7 +47,7 @@ def rf_under(undersample_X, undersample_Y, test_X, test_Y):
 	plt.figure(figsize=(5, 5))
 	# plot_confusion_matrix(cm_normalized, title='Normalized confusion matrix')
 	class_names = [0, 1]
-	plot_confusion_matrix(cm, class_names, title='Training Result for undersampled dataset')
+	plot_confusion_matrix(cm, class_names, title='Random Forest: Training Result for undersampled dataset')
 	plt.show()
 
 	y_test = train_under.predict(test_X)
@@ -57,7 +57,7 @@ def rf_under(undersample_X, undersample_Y, test_X, test_Y):
 	plt.figure(figsize=(5, 5))
 	# plot_confusion_matrix(cm_normalized, title='Normalized confusion matrix')
 	class_names = [0, 1]
-	plot_confusion_matrix(cm, class_names, title='Testing Result for undersampled dataset')
+	plot_confusion_matrix(cm, class_names, title='Random Forest: Testing Result for undersampled dataset')
 	plt.show()
 #######################################################################
 
@@ -74,7 +74,7 @@ def rf_over(oversample_X, oversample_Y, test_X, test_Y):
 	plt.figure(figsize=(5, 5))
 	# plot_confusion_matrix(cm_normalized, title='Normalized confusion matrix')
 	class_names = [0, 1]
-	plot_confusion_matrix(cm, class_names, title='Training Result for oversampled dataset')
+	plot_confusion_matrix(cm, class_names, title='Random Forest: Training Result for oversampled dataset')
 	plt.show()
 
 	y_test = train_under.predict(test_X)
@@ -85,7 +85,7 @@ def rf_over(oversample_X, oversample_Y, test_X, test_Y):
 	plt.figure(figsize=(5, 5))
 	# plot_confusion_matrix(cm_normalized, title='Normalized confusion matrix')
 	class_names = [0, 1]
-	plot_confusion_matrix(cm, class_names, title='Testing Result for undersampled dataset')
+	plot_confusion_matrix(cm, class_names, title='Random Forest: Testing Result for undersampled dataset')
 	plt.show()
 ###################################################################
 
@@ -101,7 +101,7 @@ def rf_raw(raw_X, raw_Y, test_X, test_Y):
 	plt.figure(figsize=(5, 5))
 	# plot_confusion_matrix(cm_normalized, title='Normalized confusion matrix')
 	class_names = [0, 1]
-	plot_confusion_matrix(cm, class_names, title='Training Result for raw dataset')
+	plot_confusion_matrix(cm, class_names, title='Random Forest: Training Result for raw dataset')
 	plt.show()
 
 	y_test = train_under.predict(test_X)
@@ -111,7 +111,7 @@ def rf_raw(raw_X, raw_Y, test_X, test_Y):
 	plt.figure(figsize=(5, 5))
 	# plot_confusion_matrix(cm_normalized, title='Normalized confusion matrix')
 	class_names = [0, 1]
-	plot_confusion_matrix(cm, class_names, title='Testing Result for raw dataset')
+	plot_confusion_matrix(cm, class_names, title='Random Forest: Testing Result for raw dataset')
 	plt.show()
 
 
