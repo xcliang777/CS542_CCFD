@@ -10,5 +10,5 @@ In this problem, we use three different ways: Logistic regression, random forest
 Please download the dataset first following the link below and put it in the same directory of our code.
 https://www.kaggle.com/mlg-ulb/creditcardfraud
 ```
-python main.py
+python3 main.py
 ```
