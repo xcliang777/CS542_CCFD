@@ -85,7 +85,7 @@ def rf_over(oversample_X, oversample_Y, test_X, test_Y):
 	plt.figure(figsize=(5, 5))
 	# plot_confusion_matrix(cm_normalized, title='Normalized confusion matrix')
 	class_names = [0, 1]
-	plot_confusion_matrix(cm, class_names, title='Random Forest: Testing Result for undersampled dataset')
+	plot_confusion_matrix(cm, class_names, title='Random Forest: Testing Result for oversampled dataset')
 	plt.show()
 ###################################################################
 

@@ -1,10 +1,18 @@
+<<<<<<< HEAD
+=======
 
+>>>>>>> dcc5d71e6aeb21446f24b5587adedeb966330edd
 from matplotlib import pyplot as plt
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, recall_score
+<<<<<<< HEAD
+import itertools
+
+=======
 
 import itertools
+>>>>>>> dcc5d71e6aeb21446f24b5587adedeb966330edd
 
 #train with undersampling data
 def LR_under(X_train_undersample, Y_train_undersample, X_test, Y_test):
@@ -27,6 +35,7 @@ def LR_under(X_train_undersample, Y_train_undersample, X_test, Y_test):
 
 	plt.figure()
 	plot_confusion_matrix(train_matrix,
+<<<<<<< HEAD
 						  classes=class_names,
 						  title='Logistic Regression: Training Result for undersampled dataset')
 	plt.show()
@@ -34,6 +43,15 @@ def LR_under(X_train_undersample, Y_train_undersample, X_test, Y_test):
 	plt.figure()
 	plot_confusion_matrix(test_matrix,
 						  classes=class_names,
+=======
+						  classes=class_names,
+						  title='Logistic Regression: Training Result for undersampled dataset')
+	plt.show()
+
+	plt.figure()
+	plot_confusion_matrix(test_matrix,
+						  classes=class_names,
+>>>>>>> dcc5d71e6aeb21446f24b5587adedeb966330edd
 						  title='Logistic Regression: Testing Result for undersampled dataset')
 	plt.show()
 
@@ -42,14 +60,6 @@ def LR_under(X_train_undersample, Y_train_undersample, X_test, Y_test):
 #train with oversampling data
 def LR_over(X_train_over, y_train_over, X_test, Y_test):
 
-	# X1 = np.array(data.ix[:, data.columns != 'Class'])
-	# y1 = np.array(data.ix[:, data.columns == 'Class'])
-	#
-	# X_train_over, X_test_over, y_train_over, y_test_over = train_test_split(X1, y1, test_size=0.3, random_state=0)
-	#
-	# sm = SMOTE(random_state=2)
-	#
-	# X_train_res, y_train_res = sm.fit_sample(X_train_over, y_train_over.ravel())
 
 	lr = LogisticRegression(C=0.01, solver='liblinear', penalty='l2')
 	lr.fit(X_train_over, y_train_over.ravel())
@@ -85,7 +95,6 @@ def LR_over(X_train_over, y_train_over, X_test, Y_test):
 # print("------------------------------------------------------------------------")
 
 #train with all data
-
 def LR_all(X_train, Y_train, X_test, Y_test):
 	lr = LogisticRegression(C=10, solver='liblinear', penalty='l2')
 	lr.fit(X_train, Y_train.values.ravel())
@@ -119,7 +128,10 @@ def LR_all(X_train, Y_train, X_test, Y_test):
 	plt.show()
 
 # print("--------------------------------------------------------------------")
+<<<<<<< HEAD
+=======
 
+>>>>>>> dcc5d71e6aeb21446f24b5587adedeb966330edd
 # Plot Confusion Matrix
 def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.cm.Blues):
 	plt.imshow(cm, interpolation='nearest', cmap=cmap)

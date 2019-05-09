@@ -1,5 +1,6 @@
 import random_forest
 import logistic_regression as logr
+import decision_tree
 
 
 import numpy as np
@@ -73,11 +74,6 @@ print("Percentage of normal transactions: ", len(under_sample_data[under_sample_
 print("Percentage of fraud transactions: ", len(under_sample_data[under_sample_data.Class == 1])/len(under_sample_data))
 print("Total number of transactions in resampled data: ", len(under_sample_data))
 
-print("--------------------------------------------------------------------------------------------------------------")
-print("Percentage of normal transactions: ", len(under_sample_data[under_sample_data.Class == 0])/len(under_sample_data))
-print("Percentage of fraud transactions: ", len(under_sample_data[under_sample_data.Class == 1])/len(under_sample_data))
-print("Total number of transactions in resampled data: ", len(under_sample_data))
-
 colors = ["#0101DF", "#DF0101"]
 
 sns.countplot('Class', data=undersample_Y, palette=colors)
@@ -97,16 +93,24 @@ print("Total number of oversampled transactions: ", len(oversample_Y))
 '''
 Part 3:  Method: Logical Regression
 '''
-logr.LR_under(undersample_X, undersample_Y, X_test_undersample, Y_test_undersample)
-logr.LR_over(oversample_X, oversample_Y, X_test_undersample, Y_test_undersample)
-logr.LR_all(X_train, Y_train, X_test_undersample, Y_test_undersample)
+# logr.LR_under(undersample_X, undersample_Y, X_test_undersample, Y_test_undersample)
+# logr.LR_over(oversample_X, oversample_Y, X_test_undersample, Y_test_undersample)
+# logr.LR_all(X_train, Y_train, X_test_undersample, Y_test_undersample)
 
 '''
-Part 4:  Method: Random Forest
+Part 4:  Method: Decision Tree
 '''
-random_forest.rf_under(undersample_X, undersample_Y, X_test_undersample, Y_test_undersample)
-random_forest.rf_over(oversample_X, oversample_Y, X_test_undersample, Y_test_undersample)
-random_forest.rf_raw(X_train, Y_train, X_test_undersample, Y_test_undersample)
+decision_tree.dt_under(undersample_X, undersample_Y, X_test_undersample, Y_test_undersample)
+decision_tree.dt_over(oversample_X, oversample_Y, X_test_undersample, Y_test_undersample)
+decision_tree.dt_raw(X_train, Y_train, X_test_undersample, Y_test_undersample)
+
+'''
+Part 5:  Method: Random Forest
+'''
+# random_forest.rf_under(undersample_X, undersample_Y, X_test_undersample, Y_test_undersample)
+# random_forest.rf_over(oversample_X, oversample_Y, X_test_undersample, Y_test_undersample)
+# random_forest.rf_raw(X_train, Y_train, X_test_undersample, Y_test_undersample)
+
 
 
 
