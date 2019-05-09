@@ -93,9 +93,9 @@ print("Total number of oversampled transactions: ", len(oversample_Y))
 '''
 Part 3:  Method: Logical Regression
 '''
-# logr.LR_under(undersample_X, undersample_Y, X_test_undersample, Y_test_undersample)
-# logr.LR_over(oversample_X, oversample_Y, X_test_undersample, Y_test_undersample)
-# logr.LR_all(X_train, Y_train, X_test_undersample, Y_test_undersample)
+logr.LR_under(undersample_X, undersample_Y, X_test_undersample, Y_test_undersample)
+logr.LR_over(oversample_X, oversample_Y, X_test_undersample, Y_test_undersample)
+logr.LR_all(X_train, Y_train, X_test_undersample, Y_test_undersample)
 
 '''
 Part 4:  Method: Decision Tree
@@ -107,9 +107,9 @@ decision_tree.dt_raw(X_train, Y_train, X_test_undersample, Y_test_undersample)
 '''
 Part 5:  Method: Random Forest
 '''
-# random_forest.rf_under(undersample_X, undersample_Y, X_test_undersample, Y_test_undersample)
-# random_forest.rf_over(oversample_X, oversample_Y, X_test_undersample, Y_test_undersample)
-# random_forest.rf_raw(X_train, Y_train, X_test_undersample, Y_test_undersample)
+random_forest.rf_under(undersample_X, undersample_Y, X_test_undersample, Y_test_undersample)
+random_forest.rf_over(oversample_X, oversample_Y, X_test_undersample, Y_test_undersample)
+random_forest.rf_raw(X_train, Y_train, X_test_undersample, Y_test_undersample)
 
 
 
